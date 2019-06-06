@@ -75,7 +75,7 @@ int Menu::run() {
 			cout << "Rückblicke einer Episode eingeben " << endl;
 			cin >> j;
 			for (unsigned int i = 0; i < episodes.size(); ++i)
-				if (episodes[i].getNumber() == w) {
+				if (episodes[i].getNumber() == j) {
 					cout << episodes[i].showFlashback() << endl;
 				}
 			break;

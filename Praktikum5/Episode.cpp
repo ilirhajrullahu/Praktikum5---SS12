@@ -22,11 +22,26 @@ void Episode::showNrEng() {
 }
 
 string Episode::showFlashback() {
-	string strNew;
+	string strNew = "";
 	string start = "<FLASHBACK>";
 	string end = "</FLASHBACK>";
-	size_t startIndex = inhalt.find(start);
+	string newString;
+	int newStart;
+
+while (inhalt.find("<FLASHBACK>") != std::string::npos) {
+
+	int startIndex = inhalt.find(start);
 	startIndex += start.length();
-	std::string::size_type endIndex = inhalt.find(end, startIndex); 
-	return inhalt.substr(startIndex, endIndex - startIndex);
+	int endIndex = inhalt.find(end, startIndex);
+	strNew = inhalt.substr(startIndex, endIndex - startIndex);
+	
+	return strNew;
+	/*newStart = endIndex += end.length();
+	newString = inhalt.substr(newStart);
+	inhalt = newString;*/
+	
 }
+}
+		
+		
+	
