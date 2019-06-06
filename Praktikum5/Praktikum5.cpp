@@ -9,7 +9,7 @@ int main()
 {
 	Menu menu;
 	menu.readData();
-	menu.show();
+	menu.run();
 }
 
 // Programm ausführen: STRG+F5 oder "Debuggen" > Menü "Ohne Debuggen starten"
