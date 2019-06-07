@@ -72,14 +72,22 @@ int Menu::run() {
 			break;
 		case '2':
 			double j;
-			cout << "Rückblicke einer Episode eingeben " << endl;
+			cout << "Von welcher Episode sollen die Rückblicke ausgegeben werden: " << endl;
 			cin >> j;
 			for (unsigned int i = 0; i < episodes.size(); ++i)
 				if (episodes[i].getNumber() == j) {
-					cout << episodes[i].showFlashback() << endl;
+					cout << episodes[i].getFlashback() << endl;
 				}
 			break;
-
+		case '3':
+			double k;
+			cout << "Von welcher Episode sollen die 15 häufigsten Wörter ausgegeben werden: " << endl;
+			cin >> k;
+			for (unsigned int i = 0; i < episodes.size();++i)
+				if (episodes[i].getNumber() == k) {
+					episodes[i].showFrequencyOfWords();
+				}
+			break;
 		case '9':
 			return 0;
 		}
