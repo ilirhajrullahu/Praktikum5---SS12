@@ -38,31 +38,55 @@ string Episode::getFlashback() {
 	startIndex += start.length();
 	endIndex = inhalt.find(end, startIndex);
 	strNew += inhalt.substr(startIndex, endIndex - startIndex);
-	newStart = endIndex + end.length();
+	newStart = endIndex + end.length() ;
 	inhalt = inhalt.substr(newStart);
 	
 	} while (inhalt.find("<FLASHBACK>") != std::string::npos);
 	return strNew;
 }
 		
-void Episode::fillWordTree() {
+void Episode::fillMap() {
+
 	string tmp;
 	stringstream ss(getFlashback());
-	vector<string> words;
+	while (getline(ss, tmp, ' '))
+	{
+		if (words.empty()) {
+			words.insert({ tmp,1 });
+		}
+		else {
+			for (auto& it : words)
+			{
+				if (it.first == tmp)
+					{
+						++it.second;
+					}
+				else {
+					
+					if (it.first != tmp)
+					{
+						words.insert({ tmp,1 });
+						
+					}
+				}
+			}
+		}
+	}
+	copy(words.begin(),words.end(),back_inserter<vector<pair>>(vec));
 
-	while (getline(ss, tmp, ' ')) {
-		words.push_back(tmp);
-	}
-	for (unsigned int i = 0; i < words.size(); ++i) {
-		wordTree.insertNode(words[i]);
-	}
+	sort(vec.begin(), vec.end(),[](const pair& l, const pair& r) {
+		if (l.second != r.second)
+			return l.second > r.second;
+
+		return l.first < r.first;
+	});
+
 }
+		
 
-void Episode::showFrequencyOfWords() {
-	fillWordTree();
-	for (unsigned int i = 0; i < 15; ++i) {
-		cout << wordTree.postOrderTraversal() << endl;
+void Episode::printVec() {
+	fillMap();
+	for(vector<pair>::iterator it = vec.begin();it!=vec.begin()+15;++it) {
+		std::cout << it->first << " " << it->second << endl;
 	}
-
-}
-	
+	} 

@@ -63,7 +63,7 @@ int Menu::run() {
 				episodes[i].showNrEng();
 			}
 			double w;
-			cout << "Welchen Episodeninhalt möchten Sie sehen? " << endl;
+			cout << "Welchen Episodeninhalt möchten Sie sehen? " ;
 			cin >> w;
 			for (unsigned int i = 0; i < episodes.size(); ++i)
 				if (episodes[i].getNumber() == w) {
@@ -72,7 +72,7 @@ int Menu::run() {
 			break;
 		case '2':
 			double j;
-			cout << "Von welcher Episode sollen die Rückblicke ausgegeben werden: " << endl;
+			cout << "Von welcher Episode sollen die Rückblicke ausgegeben werden: " ;
 			cin >> j;
 			for (unsigned int i = 0; i < episodes.size(); ++i)
 				if (episodes[i].getNumber() == j) {
@@ -81,12 +81,15 @@ int Menu::run() {
 			break;
 		case '3':
 			double k;
-			cout << "Von welcher Episode sollen die 15 häufigsten Wörter ausgegeben werden: " << endl;
+			cout << "Von welcher Episode sollen die 15 häufigsten Wörter ausgegeben werden: " ;
 			cin >> k;
 			for (unsigned int i = 0; i < episodes.size();++i)
 				if (episodes[i].getNumber() == k) {
-					episodes[i].showFrequencyOfWords();
+					episodes[i].printVec();
 				}
+			break;
+		case '4':
+
 			break;
 		case '9':
 			return 0;
