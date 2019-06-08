@@ -1,9 +1,11 @@
 #pragma once
 #include <string>
 #include <iostream>
-#include "Tree.h"
-#include "Tree.cpp"
 #include <vector>
+#include <map>
+#include <iterator>
+#include <sstream> 
+#include <algorithm>
 using namespace std;
 class Episode
 {
@@ -27,14 +29,16 @@ public:
 	void showNrEng();
 
 	string getFlashback();
-	void fillWordTree();
-	void showFrequencyOfWords();
+	void fillMap();
+	void printVec();
 private:
 	double number;
 	string engTitel;
 	string deTitel;
 	string inhalt;
-	Tree <string> wordTree;
+	std::map <string, int> words;
+	typedef pair<std::string, int> pair;
+	std::vector<pair> vec;
 
 
 };
