@@ -87,6 +87,76 @@ void Episode::fillMap() {
 void Episode::printVec() {
 	fillMap();
 	for(vector<pair>::iterator it = vec.begin();it!=vec.begin()+15;++it) {
-		std::cout << it->first << " " << it->second << endl;
+		cout << it->first << " " << it->second << endl;
 	}
 	} 
+
+void Episode::fillMap2() {
+
+	ifstream File;
+	string actor;
+	File.open("Hauptpersonen.txt");
+	while (File >> actor) {
+
+		actors.insert({ actor, 0 });
+	}
+	File.close();
+
+	string tmp;
+	string pure = getFlashback();
+	int position = pure.find(".");
+	while (position != string::npos) {
+		 pure.replace(position, 1, " ");
+		 position = pure.find(".", position + 1);
+		
+	}
+	int position2 = pure.find(",");
+	while (position2 != string::npos) {
+		pure.replace(position2, 1, " ");
+		position2 = pure.find(".", position2 + 1);
+
+	}
+
+
+	stringstream ss(pure);
+
+	while (getline(ss, tmp, ' '))
+	{
+		for (std::map <string, int>::iterator it = actors.begin(); it != actors.end(); ++it) {
+			if (tmp == it->first) {
+				it->second++;
+			}
+		}
+	}
+
+	copy(actors.begin(), actors.end(), back_inserter<vector<pair2>>(vec2));
+
+	sort(vec2.begin(), vec2.end(), [](const pair2& l, const pair2& r) {
+		if (l.second != r.second)
+			return l.second > r.second;
+
+		return l.first < r.first;
+	});
+}
+
+string Episode::printVec2() {
+	string hauptperson;
+	fillMap2();
+	for (auto it = vec2.begin(); it != vec2.end(); ++it) {
+		if (it->second >= 5) {
+			hauptperson += " ";
+			hauptperson += it->first ;
+		}
+	}
+	if (hauptperson.empty())
+	{
+		hauptperson = "keine spezielle ";
+	}
+		return hauptperson;
+}
+
+string Episode::toString() const {
+	std::stringstream outStream;
+	outStream << left << setw(10) << this->number << setw(7) << this->deTitel;
+	return outStream.str();
+}

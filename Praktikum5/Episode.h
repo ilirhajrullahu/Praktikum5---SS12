@@ -1,11 +1,14 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <map>
 #include <iterator>
 #include <sstream> 
 #include <algorithm>
+#include <vector>
+#include <fstream>
 using namespace std;
 class Episode
 {
@@ -31,15 +34,20 @@ public:
 	string getFlashback();
 	void fillMap();
 	void printVec();
+	void fillMap2();
+	string printVec2();
+	string toString() const;
 private:
 	double number;
 	string engTitel;
 	string deTitel;
 	string inhalt;
 	std::map <string, int> words;
-	typedef pair<std::string, int> pair;
+	typedef pair<string, int> pair ;
 	std::vector<pair> vec;
-
+	std::map <string, int> actors;
+	typedef std::pair <string, int> pair2;
+	std::vector<pair2> vec2;
 
 };
 
