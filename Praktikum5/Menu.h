@@ -11,7 +11,6 @@ public:
 	Menu();
 	~Menu();
 	void readData();
-	void show();
 	int run();
 private:
 	vector <Episode> episodes;

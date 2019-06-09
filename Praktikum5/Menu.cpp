@@ -91,8 +91,7 @@ int Menu::run() {
 		case '4':
 			cout << left << setw(10) << "Epsiode " << setw(25) << "Titel" << setw(15) << "Hauptperson(en)" << endl;
 			for (unsigned int i = 0; i < episodes.size(); ++i) {
-				cout << setw(40) << episodes[i].toString()  << episodes[i].printVec2() << endl;
-				//episodes[i].printVec2();
+				cout << setw(35) << episodes[i].toString()  << episodes[i].printVec2() << endl;
 			}
 			break;
 		case '9':
