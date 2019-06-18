@@ -31,17 +31,17 @@ string Episode::getFlashback() {
 	int newStart = 0;
 	int startIndex = 0;
 	int endIndex = 0;
-
+	string temp = inhalt;
 	do {
-
-	startIndex = inhalt.find(start);
+		
+	startIndex = temp.find(start);
 	startIndex += start.length();
-	endIndex = inhalt.find(end, startIndex);
-	strNew += inhalt.substr(startIndex, endIndex - startIndex);
+	endIndex = temp.find(end, startIndex);
+	strNew += temp.substr(startIndex, endIndex - startIndex);
 	newStart = endIndex + end.length() ;
-	inhalt = inhalt.substr(newStart);
+	temp = temp.substr(newStart);
 	
-	} while (inhalt.find("<FLASHBACK>") != std::string::npos);
+	} while (temp.find("<FLASHBACK>") != std::string::npos);
 	return strNew;
 }
 		
