@@ -43,11 +43,11 @@ private:
 	string deTitel;
 	string inhalt;
 	std::map <string, int> words;
-	typedef pair<string, int> pair ;
-	std::vector<pair> vec;
+	typedef pair<string, int> pair ; 
+	std::vector<pair> vec; //vector für häufigste wörter
 	std::map <string, int> actors;
 	typedef std::pair <string, int> pair2;
-	std::vector<pair2> vec2;
+	std::vector<pair2> vec2; //vector für hauptpersonen
 
 };
 

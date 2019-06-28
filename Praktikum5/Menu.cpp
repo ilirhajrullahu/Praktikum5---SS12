@@ -18,7 +18,7 @@ void Menu::readData() {
 		cerr << "File could not be opened." << endl;
 		exit(1);
 
-	} // end if
+	} 
 	getline(file, line); //ignore first line
 	while (getline(file,line)) {
 		stringstream linestream(line);
@@ -37,8 +37,8 @@ void Menu::readData() {
 		linestream2.clear();
 		getline(file, line, '*');
 		item4 = line;
-		getline(file, line);
-		Episode episode(stod(item1), item2, item3,item4);
+		getline(file, line); //überspringe "****"
+		Episode episode(stod(item1), item2, item3,item4); //mit doubles kann es rundungsfehler geben 
 		episodes.push_back(episode);
 	
     }
@@ -97,6 +97,5 @@ int Menu::run() {
 		case '9':
 			return 0;
 		}
-
 	}
 }
