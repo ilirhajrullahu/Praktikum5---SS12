@@ -42,9 +42,9 @@ private:
 	string engTitel;
 	string deTitel;
 	string inhalt;
-	std::map <string, int> words;
-	typedef pair<string, int> pair ; 
-	std::vector<pair> vec; //vector für häufigste wörter
+	std::map <string, int> words; //nach string sortiert da string das key ist und int der wert zu dem key
+	typedef pair<string, int> pair ;  //definition eines pairs aus string und int
+	std::vector<pair> vec; //vector für häufigste wörter, der pair speichert (siehe eine zeile oben)
 	std::map <string, int> actors;
 	typedef std::pair <string, int> pair2;
 	std::vector<pair2> vec2; //vector für hauptpersonen

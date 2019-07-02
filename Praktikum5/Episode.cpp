@@ -35,29 +35,31 @@ string Episode::getFlashback() {
 	do {
 		
 	startIndex = temp.find(start);
-	startIndex += start.length();
+	startIndex += start.length(); //start steht vor <flashback>
 	endIndex = temp.find(end, startIndex); // ab start index bis end string gefunden ist
-	strNew += temp.substr(startIndex, endIndex - startIndex);
-	newStart = endIndex + end.length() ;
-	temp = temp.substr(newStart);
+	strNew += temp.substr(startIndex, endIndex - startIndex); //flashback ist alles zwischen startindex und hat die länge endIndex-startIndex
+	newStart = endIndex + end.length() ; //neuer start steht vor </flashback>
+	temp = temp.substr(newStart); //unser neue string den wir untersuchen ab newStart bis zur ende
 	
-	} while (temp.find("<FLASHBACK>") != std::string::npos);
+	} while (temp.find("<FLASHBACK>") != std::string::npos); // bis find eine null position liefert (nichts gefunden)
 	return strNew;
 }
 		
-void Episode::fillMap() {
-	//fill with map with words and their frequency
-	string tmp;
+void Episode::fillMap() { //fill with map with words and their frequency
+	string tmp = "";
 	stringstream ss(getFlashback());
-	while (getline(ss, tmp, ' '))
+	while (getline(ss, tmp, ' ')) // lese jedes wort getrennt mit leerzeichen
 	{
-		 words[tmp]++;
+		if (tmp != "") { //falls es kein leeres string ist
+			words[tmp]++; // falls das key vorhanden ist dann wird der wert erhöht. Falls nicht dann wird ein neues pair angelegt und zähler um 1 erhöht
+		}
+		 
 	} 
 
-	copy(words.begin(),words.end(),back_inserter<vector<pair>>(vec)); // copy them to the vector 
+	copy(words.begin(),words.end(),back_inserter(vec)); // copy them to the vector 
 	
-	sort(vec.begin(), vec.end(),[](const pair& l, const pair& r) { //sort the vector of words with the frequency
-		if (l.second != r.second) {
+	sort(vec.begin(), vec.end(),[](const pair& l, const pair& r) { //sort the vector of words with the frequency with a lambda function that takes 2 pairs as parameters
+		if (l.second != r.second) { //wir sortieren nach second (in diesem Fall int)
 			return l.second > r.second;
 		}
 		return l.second < r.second;
@@ -70,12 +72,12 @@ void Episode::printVec() {
 	for(vector<pair>::iterator it = vec.begin();it!=vec.begin()+15;++it) {
 		cout << it->first << " " << it->second << endl;
 	}
-	 } 
+ } 
 
 void Episode::fillMap2() {
 
 	ifstream File;
-	string actor;
+	string actor = "";
 	File.open("Hauptpersonen.txt");
 	while (File >> actor) {
 
@@ -83,24 +85,24 @@ void Episode::fillMap2() {
 	}
 	File.close();
 	
-	string tmp;
-	int startpos;
+	string tmp = "";
+	int startpos = 0;
 
 	for (auto it = actors.begin(); it != actors.end(); ++it) {
 		tmp = it->first;
 		string ss = getFlashback();
 		while (ss.find(tmp) != std::string::npos) {
-			it->second++;
-			startpos = ss.find(tmp) + tmp.length();
-			ss = ss.substr(startpos);
+			it->second++; //falls der actor gefunden ist erhöhe counter
+			startpos = ss.find(tmp) + tmp.length(); // startpos ab dem gefundenen actor
+			ss = ss.substr(startpos); // neuer string ab startposition
 		}
 	}
-	copy(actors.begin(), actors.end(), back_inserter<vector<pair2>>(vec2));
+	copy(actors.begin(), actors.end(), back_inserter(vec2));
 
 }
 
 string Episode::printVec2() {
-	string hauptperson;
+	string hauptperson ="";
 	fillMap2();
 	for (auto it = vec2.begin(); it != vec2.end(); ++it) {
 		if (it->second >= 5) {
@@ -118,6 +120,6 @@ string Episode::printVec2() {
 
 string Episode::toString() const {
 	std::stringstream outStream;
-	outStream << left << setw(10) << this->number << setw(7) << this->deTitel;
+	outStream << left << setw(10) << this->number << setw(7) << this->deTitel; //left = ganz links verschieben this->number und ein raum 
 	return outStream.str();
 }
